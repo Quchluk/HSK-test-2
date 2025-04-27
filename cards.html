@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>Карточки – HSK Helper</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Шрифт Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h3>Прогресс:</h3>
+    <div id="progress-container">
+        <div id="progress-bar"></div>
+    </div>
+    <div id="progress-text"></div>
+    <div id="flashcard-navigation">
+        <button onclick="previousFlashcard()">←</button>
+        <button onclick="nextFlashcardManual()">→</button>
+    </div>
+    <div id="flashcard" onclick="flipCard()">
+        <div class="card-content">
+            <div id="card-front" class="card-face card-front">
+                <p id="hanzi"></p>
+            </div>
+            <div id="card-back" class="card-face card-back">
+                <p id="pinyin"></p>
+                <p id="translation"></p>
+            </div>
+        </div>
+    </div>
+    <div id="card-actions">
+        <button class="danger big-btn" onclick="markWrong()">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                <line x1="4" y1="4" x2="20" y2="20"></line>
+                <line x1="20" y1="4" x2="4" y2="20"></line>
+            </svg>
+        </button>
+        <button class="success big-btn" onclick="markCorrect()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4 16 L10 22 L20 8"></path>
+            </svg>
+        </button>
+    </div>
+    <button onclick="saveUnknownWords()">Скачать слова</button>
+    <button class="back-button" onclick="goBack()">← Назад</button>
+    <h3>Выученные:</h3>
+    <div id="learned-words"></div>
+    <div id="user-icon" onclick="goToDashboard()">
+        <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="12" cy="8" r="4"></circle>
+            <path d="M4 18 C4 14 20 14 20 18 V22 H4 Z"></path>
+        </svg>
+    </div>
+    <script src="cards.js"></script>
+    <script>
+        function goToDashboard() {
+            window.location.href = 'dashboard.html';
+        }
+        function goBack() {
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>

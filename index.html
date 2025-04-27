@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>HSK Слова – HSK Helper</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Шрифт Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>HSK Слова</h1>
+    <div id="word-grid"></div>
+    <div class="word-grid-buttons">
+        <button id="select-all-button" onclick="selectAllWords()">Выбрать все</button>
+        <button id="reset-button" onclick="resetAllWords()">Сбросить</button>
+    </div>
+    <div class="word-grid-buttons">
+        <button id="learn-button" onclick="prepareFlashcards()">Добавить слова</button>
+        <button id="save-button" onclick="saveUnknownWords()">Сохранить слова</button>
+    </div>
+    <button class="back-button" onclick="selectLevelAgain()">← Назад</button>
+    <div id="user-icon" onclick="goToDashboard()">
+        <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="12" cy="8" r="4"></circle>
+            <path d="M4 18 C4 14 20 14 20 18 V22 H4 Z"></path>
+        </svg>
+    </div>
+    <script src="script.js"></script>
+    <script>
+        function goToDashboard() {
+            window.location.href = 'dashboard.html';
+        }
+    </script>
+</body>
+</html>

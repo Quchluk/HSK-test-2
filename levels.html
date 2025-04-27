@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Выбор уровня HSK – HSK Helper</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Шрифт Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Выберите уровень HSK</h1>
+    <div class="levels-buttons">
+        <button onclick="selectLevel('hsk1.json')">HSK 1</button>
+        <button onclick="selectLevel('hsk2.json')">HSK 2</button>
+        <button onclick="selectLevel('hsk3.json')">HSK 3</button>
+        <button onclick="selectLevel('hsk4.json')">HSK 4</button>
+    </div>
+    <button class="back-button" onclick="goToDashboard()">← Назад</button>
+    <div id="user-icon" onclick="goToDashboard()">
+        <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="12" cy="8" r="4"></circle>
+            <path d="M4 18 C4 14 20 14 20 18 V22 H4 Z"></path>
+        </svg>
+    </div>
+    <script>
+        function selectLevel(levelFile) {
+            localStorage.setItem('selectedLevel', levelFile);
+            window.location.href = 'index.html';
+        }
+        function goToDashboard() {
+            window.location.href = 'dashboard.html';
+        }
+    </script>
+</body>
+</html>

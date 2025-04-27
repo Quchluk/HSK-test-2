@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>HSK Helper – Вход / Регистрация</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Подключение шрифта Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1 class="logo">HSK Helper</h1>
+    <div class="tab-container">
+        <div id="tab-login" class="tab active" onclick="showLogin()">Вход</div>
+        <div id="tab-register" class="tab" onclick="showRegister()">Регистрация</div>
+    </div>
+    <div id="login-form" class="form-container">
+        <h2>Вход в аккаунт</h2>
+        <input type="text" id="login-username" placeholder="Имя пользователя"><br>
+        <input type="password" id="login-password" placeholder="Пароль"><br>
+        <button onclick="login()">Войти</button>
+    </div>
+    <div id="register-form" class="form-container" style="display: none;">
+        <h2>Создать аккаунт</h2>
+        <input type="text" id="register-username" placeholder="Имя пользователя"><br>
+        <input type="password" id="register-password" placeholder="Пароль"><br>
+        <input type="password" id="register-password2" placeholder="Повторите пароль"><br>
+        <button onclick="register()">Зарегистрироваться</button>
+    </div>
+    <script>
+        // Показать форму входа
+        function showLogin() {
+            document.getElementById('login-form').style.display = 'block';
+            document.getElementById('register-form').style.display = 'none';
+            document.getElementById('tab-login').classList.add('active');
+            document.getElementById('tab-register').classList.remove('active');
+        }
+        // Показать форму регистрации
+        function showRegister() {
+            document.getElementById('login-form').style.display = 'none';
+            document.getElementById('register-form').style.display = 'block';
+            document.getElementById('tab-register').classList.add('active');
+            document.getElementById('tab-login').classList.remove('active');
+        }
+        // Функция входа
+        function login() {
+            const username = document.getElementById('login-username').value;
+            const password = document.getElementById('login-password').value;
+            if (!username || !password) {
+                alert("Пожалуйста, заполните все поля");
+                return;
+            }
+            // Проверка наличия пользователя
+            const storedPass = localStorage.getItem('user_' + username + '_password');
+            if (!storedPass) {
+                alert("Неверное имя пользователя или пароль");
+                return;
+            }
+            // Проверка пароля (сравниваем base64)
+            const encodedInputPass = btoa(password);
+            if (storedPass !== encodedInputPass) {
+                alert("Неверное имя пользователя или пароль");
+                return;
+            }
+            // Успешный вход
+            localStorage.setItem('currentUser', username);
+            window.location.href = 'dashboard.html';
+        }
+        // Функция регистрации
+        function register() {
+            const username = document.getElementById('register-username').value;
+            const password = document.getElementById('register-password').value;
+            const password2 = document.getElementById('register-password2').value;
+            if (!username || !password || !password2) {
+                alert("Пожалуйста, заполните все поля");
+                return;
+            }
+            if (password !== password2) {
+                alert("Пароли не совпадают");
+                return;
+            }
+            // Проверка на существование пользователя
+            if (localStorage.getItem('user_' + username + '_password')) {
+                alert("Пользователь с таким именем уже существует");
+                return;
+            }
+            // Сохранение нового пользователя (пароль в base64)
+            const encodedPass = btoa(password);
+            localStorage.setItem('user_' + username + '_password', encodedPass);
+            // Инициализация списков слов для нового пользователя
+            localStorage.setItem('user_' + username + '_wordsInProgress', JSON.stringify([]));
+            localStorage.setItem('user_' + username + '_wordsLearned', JSON.stringify([]));
+            // Установка текущего пользователя и переход в личный кабинет
+            localStorage.setItem('currentUser', username);
+            window.location.href = 'dashboard.html';
+        }
+    </script>
+</body>
+</html>

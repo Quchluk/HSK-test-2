@@ -1,0 +1,300 @@
+/* Основные стили для HSK Helper */
+body {
+    margin: 0;
+    padding: 20px;
+    background-color: #0D1B2A;
+    color: #E0E1DD;
+    font-family: 'Inter', sans-serif;
+}
+h1, h2, h3 {
+    text-align: center;
+}
+#word-list h3 {
+    text-align: left;
+}
+#stats {
+    margin-bottom: 20px;
+    font-size: 1em;
+}
+/* Логотип */
+.logo {
+    font-size: 2em;
+    font-weight: 700;
+    color: #52B788;
+    text-align: center;
+    margin: 20px 0;
+}
+/* Панель вкладок на странице входа */
+.tab-container {
+    display: inline-flex;
+    margin: 0 auto 20px auto;
+    border: 1px solid #E0E1DD;
+    border-radius: 5px;
+    overflow: hidden;
+}
+.tab {
+    padding: 10px 20px;
+    cursor: pointer;
+    background: none;
+    color: #E0E1DD;
+}
+.tab + .tab {
+    border-left: 1px solid #E0E1DD;
+}
+.tab.active {
+    background: #E0E1DD;
+    color: #0D1B2A;
+}
+/* Формы входа и регистрации */
+.form-container {
+    width: 100%;
+    max-width: 300px;
+    margin: 20px auto;
+}
+.form-container h2 {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+input[type=text], input[type=password] {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 8px;
+    margin: 5px 0;
+    background: #1B263B;
+    border: 1px solid #E0E1DD;
+    border-radius: 4px;
+    color: #E0E1DD;
+}
+input[type=text]::placeholder,
+input[type=password]::placeholder {
+    color: #778DA9;
+}
+input[type=text]:focus, input[type=password]:focus {
+    outline: none;
+    border-color: #52B788;
+}
+/* Кнопки */
+button {
+    background: #52B788;
+    color: #E0E1DD;
+    border: none;
+    padding: 10px 15px;
+    margin: 5px;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: 0.3s;
+}
+button:hover {
+    opacity: 0.9;
+}
+.danger {
+    background: #E63946;
+    color: #E0E1DD;
+}
+.success {
+    background: #52B788;
+    color: #E0E1DD;
+}
+/* Кнопка Назад (отличается стилем) */
+.back-button {
+    background: none;
+    color: #E0E1DD;
+    border: 1px solid #E0E1DD;
+    padding: 8px 12px;
+    margin: 10px 0;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.back-button:hover {
+    background: #E0E1DD;
+    color: #0D1B2A;
+}
+/* Иконка пользователя */
+#user-icon {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    background: #E0E1DD;
+    color: #0D1B2A;
+    border-radius: 50%;
+    padding: 5px;
+    cursor: pointer;
+    font-size: 1.2em;
+}
+/* Прогресс-бар */
+#progress-container {
+    background: #E0E1DD;
+    width: 100%;
+    max-width: 400px;
+    height: 10px;
+    margin: 10px auto;
+    border-radius: 5px;
+    overflow: hidden;
+}
+#progress-bar {
+    background: #52B788;
+    width: 0%;
+    height: 100%;
+}
+#progress-text {
+    font-size: 0.9em;
+    margin-bottom: 20px;
+}
+/* Область карточки (флэшкарты) */
+#flashcard-navigation {
+    text-align: center;
+    margin: 10px 0;
+}
+#flashcard {
+    perspective: 1000px;
+    width: 80%;
+    max-width: 400px;
+    margin: 20px auto;
+}
+.card-content {
+    position: relative;
+    width: 100%;
+    height: 250px;
+    transform-style: preserve-3d;
+    transition: transform 0.6s;
+}
+.flipped .card-content {
+    transform: rotateY(180deg);
+}
+.card-face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    background: #E0E1DD;
+    color: #0D1B2A;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 10px;
+}
+.card-back {
+    transform: rotateY(180deg);
+}
+#hanzi {
+    font-size: 3em;
+    margin: 0;
+}
+#pinyin, #translation {
+    font-size: 1.2em;
+    margin: 5px 0;
+}
+/* Контейнер выбора уровней */
+.levels-buttons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 20px 0;
+}
+/* Сетка слов для выбора */
+#word-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 10px;
+    margin: 20px 0;
+}
+.word-option {
+    display: flex;
+    align-items: center;
+    background: #1B263B;
+    padding: 10px;
+    border-radius: 5px;
+}
+.word-option span {
+    margin-left: 8px;
+}
+.word-option.selected {
+    background: #415A77;
+}
+/* Группа кнопок в списке слов */
+.word-grid-buttons {
+    text-align: center;
+    margin: 10px 0;
+}
+/* Список изученных слов на странице карточек */
+.learned-item {
+    background: #52B788;
+    color: #0D1B2A;
+    padding: 2px 6px;
+    margin: 2px;
+    border-radius: 3px;
+    display: inline-block;
+}
+/* Список слов в личном кабинете */
+.word-item {
+    margin: 5px 0;
+}
+#dashboard-buttons {
+    text-align: center;
+    margin: 20px 0;
+}
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 20px;
+    max-width: 600px;
+    margin: 0 auto 20px auto;
+}
+.tile {
+    background: #1B263B;
+    color: #E0E1DD;
+    padding: 40px 20px;
+    border-radius: 8px;
+    font-size: 1.1em;
+    font-weight: 700;
+    cursor: pointer;
+    text-align: center;
+    transition: transform 0.3s;
+}
+.tile:hover {
+    transform: scale(1.05);
+}
+#card-actions {
+    text-align: center;
+    margin: 20px 0;
+}
+.big-btn {
+    width: 60px;
+    height: 60px;
+    padding: 0;
+    border-radius: 50%;
+    margin: 10px;
+}
+#card-actions .big-btn svg {
+    width: 100%;
+    height: 100%;
+}
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+th, td {
+    border: 1px solid #E0E1DD;
+    padding: 8px;
+    text-align: left;
+}
+th {
+    background: #415A77;
+}
+td {
+    background: #1B263B;
+}
+#user-icon svg {
+    width: 1em;
+    height: 1em;
+}
