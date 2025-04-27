@@ -4,23 +4,29 @@
     <meta charset="UTF-8">
     <title>Личный кабинет – HSK Helper</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Шрифт Inter -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <h1 id="welcome"></h1>
     <div id="stats"></div>
-    <div id="dashboard-buttons">
-        <div class="dashboard-grid">
-            <div class="tile" onclick="goToLevels()">Добавить слова</div>
-            <div class="tile" onclick="goToCards()">Учить слова</div>
-            <div class="tile" onclick="goToWords()">Мои слова</div>
-        </div>
-        <button class="danger" onclick="logout()">Выйти</button>
+
+    <!-- Уровни сверху -->
+    <div class="levels-buttons">
+        <button onclick="selectLevel('hsk1.json')">HSK 1</button>
+        <button onclick="selectLevel('hsk2.json')">HSK 2</button>
+        <button onclick="selectLevel('hsk3.json')">HSK 3</button>
+        <button onclick="selectLevel('hsk4.json')">HSK 4</button>
     </div>
+
+    <!-- Основные плитки -->
+    <div class="dashboard-grid">
+        <div class="tile" onclick="startLearning()">Учить слова</div>
+        <div class="tile" onclick="goToWords()">Мои слова</div>
+        <div class="tile" onclick="goToChangePassword()">Сменить пароль</div>
+    </div>
+
+    <button class="danger" onclick="logout()">Выйти</button>
+
     <script>
         const currentUser = localStorage.getItem('currentUser');
         if (!currentUser) {
@@ -31,15 +37,29 @@
             const learnedCount = JSON.parse(localStorage.getItem('user_' + currentUser + '_wordsLearned'))?.length || 0;
             document.getElementById('stats').innerText = "Изучаемые: " + inProgressCount + " | Выученные: " + learnedCount;
         }
-        function goToLevels() {
-            window.location.href = 'levels.html';
+
+        function selectLevel(levelFile) {
+            localStorage.setItem('selectedLevel', levelFile);
+            window.location.href = 'select_words.html';
         }
-        function goToCards() {
+
+        function startLearning() {
+            let userInProgress = JSON.parse(localStorage.getItem('user_' + currentUser + '_wordsInProgress')) || [];
+            if (userInProgress.length === 0) {
+                alert("Нет слов для изучения. Сначала выберите и сохраните слова.");
+                return;
+            }
             window.location.href = 'cards.html';
         }
+
         function goToWords() {
             window.location.href = 'words.html';
         }
+
+        function goToChangePassword() {
+            window.location.href = 'change_password.html';
+        }
+
         function logout() {
             localStorage.removeItem('currentUser');
             window.location.href = 'login.html';
